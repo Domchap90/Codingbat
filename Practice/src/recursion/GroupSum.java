@@ -4,7 +4,7 @@ public class GroupSum {
 
 	public static void main(String[] args) {
 		int array[] = { 1, 2, 3, 10, 10, 1, 1 };
-		System.out.println(splitArray(array));
+		System.out.println(splitOdd10(array));
 	}
 	public static boolean groupSum(int start, int[] nums, int target) {
 		// base condition : every index has been checked and target has been reduced to 0 by accomplishing sum succesfully.
@@ -121,6 +121,25 @@ public class GroupSum {
 		}
 		return false;
 	}
+
+	public static boolean splitOdd10(int[] nums) {
+		return recurTest(0, 0, 0, nums);
+	}
+
+	public static boolean recurTest(int ind, int left, int right, int[] array) {
+		// base case:
+		if (ind >= array.length) {
+			return ((left % 10 == 0 && right % 2 == 1) || (right % 10 == 0 && left % 2 == 1));
+		}
+		if (recurTest(ind + 1, left + array[ind], right, array)) {
+			return true;
+		}
+		if (recurTest(ind + 1, left, right + array[ind], array)) {
+			return true;
+		}
+		return false;
+	}
+
 }
 
 
